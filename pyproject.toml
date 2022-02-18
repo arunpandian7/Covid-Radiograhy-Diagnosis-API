@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "covid-data-modelling"
+version = "0.1.0"
+description = "COVID-19 Radiography Diagnosis Tool using AI"
+authors = ["Arun Pandian R <arunpandian.srk@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+wandb = "^0.12.10"
+numpy = "^1.22.2"
+pandas = "^1.4.1"
+matplotlib = "^3.5.1"
+tqdm = "^4.62.3"
+opencv-python = "^4.5.5"
+seaborn = "^0.11.2"
+
+[tool.poetry.dev-dependencies]
+ipykernel = "^6.9.1"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
