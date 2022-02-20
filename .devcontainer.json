@@ -1,0 +1,7 @@
+{
+	"name": "PyTorch MMDetection GPU",
+	"build": {
+	  "dockerfile": "Dockerfile"
+	},
+	"runArgs": ["--gpus=all"]
+}
