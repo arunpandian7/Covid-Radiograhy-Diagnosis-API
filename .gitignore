@@ -3,7 +3,7 @@
 
 dataset/
 wandb/
-
+models/
 
 
 # Created by https://www.toptal.com/developers/gitignore/api/visualstudiocode,linux,jupyternotebooks,python
