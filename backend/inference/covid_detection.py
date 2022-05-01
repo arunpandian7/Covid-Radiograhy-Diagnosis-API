@@ -1,4 +1,6 @@
 import cv2
+import time
+
 import numpy as np
 from mmcv import Config
 from mmdet.apis import init_detector, async_inference_detector, inference_detector
@@ -18,14 +20,16 @@ class CovidAbnormalityDetector:
         print("Detection Model Loaded...")
 
     def inference_with_annot_image(self, img:np.ndarray, threshold = 0.45):
+        start = time.time()
         result = inference_detector(self.model, img)
+        end = time.time()
         results_filtered = result[0][result[0][:, 4] > threshold]
         bboxes = results_filtered[:, :4]
         scores = results_filtered[:, 4]
         for box in bboxes:
             img = draw_bbox(img, list(np.int_(box)), "Covid Detected",
                             (255, 243, 0))
-        return img
+        return img, bboxes, scores, round(end-start, 10)
 
     def inference(self, img:np.ndarray, threshold = 0.45):
         result = inference_detector(self.model, img)

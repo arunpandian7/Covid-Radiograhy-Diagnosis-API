@@ -1,6 +1,8 @@
 import os
 os.environ["TF_CPP_MIN_LOG_LEVEL"] = "2"
 
+import time
+
 import tensorflow as tf
 import tensorflow_hub as tfhub
 import numpy as np
@@ -55,9 +57,11 @@ class CovidConditionClassifier:
         with tf.device(self.device):
             img = tf.convert_to_tensor(img, tf.float32) / 255.0
             img = tf.image.resize(img, target_size)
+            start = time.time()
             pred = sum([model.predict(tf.expand_dims(img, axis=0)) for model in self.models]) / len(self.models)
+            end = time.time()
             pred_label = LABELS[pred.argmax()]
             confidence = pred[0][pred.argmax()]
-            return {"condition": pred_label, "confidence":confidence.astype(float)}
+            return pred_label, confidence, round(end-start, 10)
 
 condition_classifer = CovidConditionClassifier(ensemble=config.ENSEMBLE, use_gpu=config.USE_GPU)
