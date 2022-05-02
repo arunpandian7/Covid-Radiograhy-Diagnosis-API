@@ -62,6 +62,7 @@ class CovidConditionClassifier:
             end = time.time()
             pred_label = LABELS[pred.argmax()]
             confidence = pred[0][pred.argmax()]
+            confidence = confidence.astype(float)
             return pred_label, confidence, round(end-start, 10)
 
 condition_classifer = CovidConditionClassifier(ensemble=config.ENSEMBLE, use_gpu=config.USE_GPU)

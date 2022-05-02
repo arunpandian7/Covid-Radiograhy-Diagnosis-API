@@ -25,11 +25,17 @@ class CovidAbnormalityDetector:
         end = time.time()
         results_filtered = result[0][result[0][:, 4] > threshold]
         bboxes = results_filtered[:, :4]
-        scores = results_filtered[:, 4]
+        confidences = results_filtered[:, 4]
+
         for box in bboxes:
-            img = draw_bbox(img, list(np.int_(box)), "Covid Detected",
+            img = draw_bbox(img, list(np.int_(box)), "Covid Abnormality",
                             (255, 243, 0))
-        return img, bboxes, scores, round(end-start, 10)
+
+        bboxes = [bbox.astype(int).tolist() for bbox in bboxes]
+        confidences = confidences.tolist()
+        bboxes = {"bbox":bboxes, "confidence":confidences}
+
+        return img, bboxes, round(end-start, 10)
 
     def inference(self, img:np.ndarray, threshold = 0.45):
         result = inference_detector(self.model, img)
