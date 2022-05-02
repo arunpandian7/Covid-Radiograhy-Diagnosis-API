@@ -8,7 +8,6 @@ class AbnormalityDetectionLog(SQLModel, table=True):
     timestamp : datetime = Field(default_factory=datetime.utcnow, nullable=False)
     inference_time : float
     predicted_bbox : dict = Field(default={}, sa_column=Column(JSON))
-    confidence : List[float]
     misprediction : bool = False
     feedback_bbox : dict = Field(default={}, sa_column=Column(JSON))
     
