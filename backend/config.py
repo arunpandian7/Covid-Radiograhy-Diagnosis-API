@@ -7,3 +7,4 @@ USE_GPU = True
 ENSEMBLE = False
 
 IMAGE_DB_HOME = Path("./cxr_database")
+IMAGE_DB_HOME.mkdir(exist_ok=True)
