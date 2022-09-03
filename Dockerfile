@@ -1,7 +1,8 @@
-FROM pytorch/pytorch:1.7.0-cuda11.0-cudnn8-devel
+FROM pytorch/pytorch:1.12.0-cuda11.3-cudnn8-devel
 
-RUN apt update && \
-    apt install -y git gcc ffmpeg libsm6 libxext6 libgl1-nvidia-glx:i386
+RUN apt-get -y update \
+        && apt-get install -y --no-install-recommends \ 
+        git gcc ffmpeg libsm6 libxext6
 
 RUN pip install mmcv-full -f https://download.openmmlab.com/mmcv/dist/cu110/torch1.7.0/index.html
 
