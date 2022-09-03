@@ -2,6 +2,8 @@
 
 A high availability Real-time Deep Learning based Diagnosis Model Server for COVID-19 Infection based on Chest X-Ray Radiography. Built on FastAPI, the server handles asynchronous requests and data for Deep Learning model inference.
 
+![API Docs](../assets/api-docs-screen.png)
+
 ## Features
 
 - High Availability API
@@ -33,6 +35,10 @@ A high availability Real-time Deep Learning based Diagnosis Model Server for COV
 8) SQLAlchemy ORM
 
 9) SQLite3
+
+## Architecture Design
+
+![COVID-19 Diagnosis API Server Design](../assets/backend-api.png)
 
 ## Instructions
 
