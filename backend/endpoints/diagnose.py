@@ -22,7 +22,9 @@ r = router = APIRouter(prefix="/diagnose")
 def get_abnormalities_detection(file: UploadFile = File(...), session: Session = Depends(get_session), image_id: Optional[str] = Header(None)):
     image, image_id, file_path = save_image(file, image_id)
     image = np.array(image)
-    image = cv2.cvtColor(image, cv2.COLOR_GRAY2RGB)
+    print(image.shape)
+    if image.shape[-1] != 3:
+        image = cv2.cvtColor(image, cv2.COLOR_GRAY2RGB)
     annotated_image, bbox, inference_time = abnormality_detector.inference_with_annot_image(image)
     annotated_image = Image.fromarray(annotated_image.astype("uint8")).convert("RGB")
     output_image = BytesIO()
@@ -41,7 +43,8 @@ def get_abnormalities_detection(file: UploadFile = File(...), session: Session =
 def get_condition_classification(response: Response, file: UploadFile = File(...), session: Session = Depends(get_session), image_id: Optional[str] = Header(None)):
     image, image_id, file_path = save_image(file, image_id)
     image = np.array(image)
-    image = cv2.cvtColor(image, cv2.COLOR_GRAY2RGB)
+    if image.shape[-1] != 3:
+        image = cv2.cvtColor(image, cv2.COLOR_GRAY2RGB)
     condition, confidence, inf_time = condition_classifer.inference(image)
     
     inf_log = ConditionClassificationLog(image_id=image_id, file=str(file_path), inference_time=inf_time, predicted_class=condition, confidence=confidence)
