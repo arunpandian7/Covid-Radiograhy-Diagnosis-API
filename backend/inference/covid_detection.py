@@ -3,7 +3,7 @@ import time
 
 import numpy as np
 from mmcv import Config
-from mmdet.apis import init_detector, async_inference_detector, inference_detector
+from mmdet.apis import init_detector, inference_detector
 
 from backend import config
 
@@ -42,14 +42,15 @@ class CovidAbnormalityDetector:
         results_filtered = result[0][result[0][:, 4] > threshold]
         return results_filtered
 
-def draw_bbox(image,
-              box,
-              label,
-              color,
-              label_size = 0.5,
-              alpha_box = 0.3,
-              alpha_label = 0.6):
-    
+def draw_bbox(
+    image,
+    box,
+    label,
+    color,
+    label_size = 0.5,
+    alpha_box = 0.3,
+    alpha_label = 0.6
+): 
     overlay_bbox = image.copy()
     overlay_label = image.copy()
     output = image.copy()
