@@ -3,5 +3,5 @@
 	"build": {
 	  "dockerfile": "Dockerfile"
 	},
-	"runArgs": ["--gpus=all"]
+	"runArgs": ["--gpus=all", "-ti"]
 }
